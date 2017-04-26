@@ -1,7 +1,7 @@
-// string.cpp : �������̨Ӧ�ó������ڵ㡣
-//  һ���򵥴���string�����������ַ����������ַ������ȼ����ݵȹ��ܣ�
-//	����һ�����б༭���ܵĴ���edit_string�����̳�string�࣬����������һ����꣬
-//  ʹ����֧���ڹ�괦�Ĳ��롢�滻��ɾ���ȱ༭���ܡ�
+//  string.cpp : 定义控制台应用程序的入口点。
+//  一个简单串类string，包含输入字符串、返回字符串长度及内容等功能；
+//  另有一个具有编辑功能的串类edit_string，它继承string类，在其中设置一个光标，
+//  使其能支持在光标处的插入、替换和删除等编辑功能。
 
 
 #include "stdafx.h"
@@ -23,13 +23,13 @@ protected:
 	char *m_c;
 	int m_length;
 };
-//����
+//构造
 String::String():m_length(0)
 {
 	m_c = new char[N];
 	//cout<<"String()"<<endl;
 }
-//��������
+//拷贝构造
 String::String(const String &s)
 {
 	m_c = new char[N];
@@ -40,17 +40,17 @@ String::String(const String &s)
 	}
 	//cout<<"String(const String &s)"<<endl;
 }
-//�����ַ���
+//输入字符串
 void String::input()
 {
 	for(int i = 0; i<N; i++)
 	{
 		scanf("%c",&m_c[i]);
-		if(m_c[i] == '\n'){break;}  //������Ϊ�س���ֹͣ����
+		if(m_c[i] == '\n'){break;}  //若输入为回车则停止输入
 		else{m_length ++;}
 	}
 }
-//��ʾ
+//显示
 void String::show()
 {
 	for(int i = 0; i<m_length; i++)
@@ -59,17 +59,17 @@ void String::show()
 	}
 	cout<<endl;
 }
-//���س���
+//返回长度
 int String::getLength()
 {
 	return m_length;
 }
-//��������
+//返回内容
 char* String::getChar()
 {
 	return m_c;
 }
-//����
+//析构
 String::~String()
 {
 	delete m_c; m_c = NULL;
@@ -100,7 +100,7 @@ edit_string::edit_string(String &s)
 		m_c[i] = s.getChar()[i];
 	}
 }
-//����
+//插入
 void edit_string::insert(int i, String s)
 {
 	int l = s.getLength();
@@ -116,7 +116,7 @@ void edit_string::insert(int i, String s)
 		m_length ++;
 	}
 }
-//�滻
+//替换
 char edit_string::replace(int i, char c)
 {
 	i--;
@@ -124,7 +124,7 @@ char edit_string::replace(int i, char c)
 	m_c[i] = c;
 	return temp;
 }
-//ɾ��
+//删除
 void edit_string::deleteChar(int i, int len = 1)
 {
 	for(int k = 0; k<len; k++)
