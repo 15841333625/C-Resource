@@ -1,0 +1,37 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: Mp3 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\lenovo\AppData\Local\Temp\RSPCA20.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/Mp3.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"E:\c_c++\biancheng\Mp3\Interface.c"
+]
+Creating command line "cl.exe @C:\Users\lenovo\AppData\Local\Temp\RSPCA20.tmp" 
+Creating temporary file "C:\Users\lenovo\AppData\Local\Temp\RSPCA21.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/Mp3.pdb" /debug /machine:I386 /out:"Debug/Mp3.exe" /pdbtype:sept 
+".\Debug\main.obj"
+".\Debug\myPlayer.obj"
+".\Debug\PlayInterface.obj"
+".\Debug\Interface.obj"
+]
+Creating command line "link.exe @C:\Users\lenovo\AppData\Local\Temp\RSPCA21.tmp"
+<h3>Output Window</h3>
+Compiling...
+Interface.c
+e:\c_c++\biancheng\mp3\interface.c(61) : warning C4013: 'stop' undefined; assuming extern returning int
+e:\c_c++\biancheng\mp3\interface.c(63) : warning C4013: 'play' undefined; assuming extern returning int
+Linking...
+
+
+
+<h3>Results</h3>
+Mp3.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
