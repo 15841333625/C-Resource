@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1509413066 source:e:\c_c++\biancheng\shangji2\simulatedprkinglot\car.cpp
+	"Car.h"
+
+1509426029 source:e:\c_c++\biancheng\shangji2\simulatedprkinglot\main.cpp
+	"SimulateParkingLot.h"
+
+1509413486 e:\c_c++\biancheng\shangji2\simulatedprkinglot\car.h
+	<string>
+
+1509413486 source:e:\c_c++\biancheng\shangji2\simulatedprkinglot\car.h
+	<string>
+
+1509414709 e:\c_c++\biancheng\shangji2\simulatedprkinglot\simulateparkinglot.h
+	<iostream>
+	<sstream>
+	<fstream>
+	<stack>
+	"Car.h"
+
+1509414709 source:e:\c_c++\biancheng\shangji2\simulatedprkinglot\simulateparkinglot.h
+	<iostream>
+	<sstream>
+	<fstream>
+	<stack>
+	"Car.h"
+
+1509427510 source:e:\c_c++\biancheng\shangji2\simulatedprkinglot\simulateparkinglot.cpp
+	"SimulateParkingLot.h"
+
