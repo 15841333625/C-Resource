@@ -3,6 +3,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+#include <stack>
 using namespace std;
 
 template <class T>
@@ -87,6 +88,9 @@ public:
     BinaryTreeNode<T>* getRoot() const{                                      //返回二叉树的根结点
         return root;
     }
+    void setRoot(BinaryTreeNode<T> *node){
+        root = node;
+    }
     BinaryTreeNode<T>* getParent(BinaryTreeNode<T>* current) const{          //返回current结点的父结点
     }
     BinaryTreeNode<T>* getLeftSibling(BinaryTreeNode<T>* current) const{     //返回current结点的左兄弟
@@ -122,21 +126,70 @@ public:
     void MidOrder (BinaryTreeNode<T>* node){                                 //中序递归遍历二叉树或其子树
         BinaryTreeNode<T>* pointer = node;
          if (pointer != NULL) {
-            PreOrder(pointer->leftChild);
+            MidOrder(pointer->leftChild);
             visit(pointer);
-            PreOrder(pointer->rightChild);
+            MidOrder(pointer->rightChild);
           }
     }
     void AftOrder (BinaryTreeNode<T>* node){                                 //后序递归遍历二叉树或其子树
         BinaryTreeNode<T>* pointer = node;
          if (pointer != NULL) {
-            PreOrder(pointer->leftChild);
-            PreOrder(pointer->rightChild);
+            AftOrder(pointer->leftChild);
+            AftOrder(pointer->rightChild);
             visit(pointer);
           }
     }
     void visit(BinaryTreeNode<T>* current){                                  //访问当前结点
         cout<<current->element<<'\t';
+    }
+    void preTraversal(BinaryTreeNode<T> *root){                              //深度前序非递归周游
+        stack<BinaryTreeNode<T>*> s;
+        BinaryTreeNode<T>* pointer = root;
+        while(!s.empty() || pointer){                                        //栈空且指针指向NULL时停止循环
+            if(pointer){
+                visit(pointer);
+                if(pointer->rightChild != NULL)                              //非空右孩子入栈
+                    s.push(pointer->rightChild);
+                pointer = pointer->leftChild;
+            }else{
+                pointer = s.top();                                           //获得栈顶元素
+                s.pop();                                                     //弹栈
+            }
+        }
+    }
+    void midTraversal(BinaryTreeNode<T> *root){                              //深度中序非递归周游
+        stack<BinaryTreeNode<T>*> s;
+        BinaryTreeNode<T> *pointer = root;
+        while(!s.empty() || pointer){
+            if(pointer){
+                s.push(pointer);                                             //当前指针入栈
+                pointer = pointer->leftChild;                                //左路下降
+            }else{                                                           //左子树访问完毕，转向访问右子树
+                pointer = s.top();                                           //获得栈顶元素
+                s.pop();                                                     //弹栈
+                visit(pointer);                                              //访问当前结点
+                pointer = pointer->rightChild;                               //指针指向右孩子
+            }
+        }
+    }
+    void aftTraversal(BinaryTreeNode<T> *root){                              //深度后序非递归周游
+        stack<BinaryTreeNode<T>*> s;
+        BinaryTreeNode<T> *p = root,                                         //当前指针
+                          *q = root;                                         //上一个访问的指针
+        while(p != NULL){
+            for(; p->leftChild != NULL; p = p->leftChild)                    //从左下第一个结点开始循环
+                s.push(p);
+            while(p != NULL && (p->rightChild == NULL || p->rightChild == q)){     //当前结点不为空并且其右孩子为空或访问过则访问当前结点
+                visit(p);
+                q = p;
+                if(s.empty())                                                //栈空则返回
+                    return;
+                p = s.top();                                                 //弹栈
+                s.pop();
+            }
+            s.push(p);                                                       //当前结点不为空且右孩子没被访问过则当前结点入栈
+            p = p->rightChild;
+        }
     }
 };
 
