@@ -26,7 +26,7 @@ public:
 template<class T>
 class BinarySearchTree{
 private:
-    TreeNode<T>* root;                      //根结点
+    TreeNode<T>* root;                              //根结点
 public:
     BinarySearchTree(){
         root = NULL;
@@ -34,7 +34,7 @@ public:
     ~BinarySearchTree(){
         destory(root);
     }
-    void destory(TreeNode<T>* node){        //销毁二叉树
+    void destory(TreeNode<T>* node){                //销毁二叉树
         TreeNode<T>* temp = node;
         if(temp == NULL)
             return;
@@ -46,21 +46,21 @@ public:
     TreeNode<T>* getRoot(){
         return root;
     }
-    void insert(T data){                   //插入新结点
+    void insert(T data){                            //插入新结点
         TreeNode<T>* node = new TreeNode<T>(data);
-        if(!root){                         //如果树为空则设为根节点
+        if(!root){                                  //如果树为空则设为根节点
             root = node;
         }else{
             TreeNode<T>* pointer = root;
             while(pointer){
-                if(pointer->data == data)  //如果已存在相同关键码，则返回
+                if(pointer->data == data)           //如果已存在相同关键码，则返回
                     return;
-                else if(pointer->data > data){  //如果要插入结点关键码比当前结点关键码小且左孩子指针为空，则设置为左孩子
+                else if(pointer->data > data){      //如果要插入结点关键码比当前结点关键码小且左孩子指针为空，则设置为左孩子
                     if(!pointer->leftChild){
                         pointer->leftChild = node;
                         node->parent = pointer;
                         return;
-                    }else{                 //否则当前指针向左移动
+                    }else{                          //否则当前指针向左移动
                         pointer = pointer->leftChild;
                     }
                 }else if(pointer->data < data){
@@ -101,6 +101,14 @@ public:
         pointer = search(data);
         if(pointer){
             if(pointer->isLeaf()){                  //要删除的结点为叶子结点时，直接删除此节点
+                if(pointer == root){
+                    root = NULL;
+                    return;
+                }
+                if(pointer->parent->leftChild == pointer)
+                    pointer->parent->leftChild = NULL;
+                else
+                    pointer->parent->rightChild = NULL;
                 delete pointer;
                 pointer = NULL;
                 return;
@@ -112,7 +120,10 @@ public:
                     node->parent->rightChild = node->leftChild;
                     node->leftChild->parent = node->parent;
                 }else{
-                    node->parent->rightChild = NULL;
+                    if(node->parent->rightChild == node)
+                        node->parent->rightChild = NULL;
+                    else
+                        node->parent->leftChild = NULL;
                 }
                 pointer->data = node->data;         //用替身的关键码代替要删除元素的关键码
                 delete node;                        //销毁替身
@@ -125,7 +136,10 @@ public:
                     node->parent->leftChild = node->rightChild;
                     node->rightChild->parent = node->parent;
                 }else{
-                    node->parent->leftChild = NULL;
+                    if(node->parent->leftChild == node)
+                        node->parent->leftChild = NULL;
+                    else
+                        node->parent->rightChild = NULL;
                 }
                 pointer->data = node->data;
                 delete node;

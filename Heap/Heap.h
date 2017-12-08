@@ -2,7 +2,7 @@
 #define HEAP_H_INCLUDED
 #include<iostream>
 using namespace std;
-int const MAX = 20;
+int const MAX = 100;
 
 template<class T>
 class MaxHeap{
@@ -15,7 +15,7 @@ public:
         for(int i = 0; i < num; i ++){
             compTree[i] = arr[i];
         }
-        print();
+//        print();
         init();                            //初始化最大堆
     }
     void init(){
@@ -82,6 +82,14 @@ public:
             if(temp == -1)
                 break;
             index = temp;
+        }
+    }
+    void delTop(T &x){                     //删除堆顶结点，存在x中
+        if(num > 0){
+            x = compTree[0];
+            del(compTree[0]);
+        }else{
+            cout<<"无法删除"<<endl;
         }
     }
 };
